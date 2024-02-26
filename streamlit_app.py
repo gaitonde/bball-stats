@@ -1,29 +1,16 @@
+# streamlit_app.py
+
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
-#import pandas as pd
-#import numpy as np
 
+# Create a connection object.
 conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read(
-    worksheet="Data",
-)
-# Print results.
+
+# df = conn.read()
 # for row in df.itertuples():
 #     st.write(f"{row.name} has a :{row.pet}:")
 
-def calc_effective_fg_pct(fgm, fgm3, fga):
-    return (fgm + (0.5*fgm3))/fga
-
-pct = calc_effective_fg_pct(5,3,14)
-
-st.title('Simple Stat Tracker')
-number = st.number_input('Insert a number')
-st.write('The current number is ', number)
-st.write(pct)
-
-st.button("Reset", type="primary")
-
-if st.button('Say hellox'):
-    st.write('Why hello there')
-else:
-    st.write('Goodbye')
+url = "https://docs.google.com/spreadsheets/d/1fQz2Ix6heBb8ORtGFsNqcPodfM79a-29_9WMWHcEJR0/edit"
+data = conn.read(spreadsheet=url, usecols=[0, 1])
+# Print results.
+st.dataframe(data)

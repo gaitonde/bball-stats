@@ -1,0 +1,5 @@
+streamlit
+st-gsheets-connection
+pandas
+streamlit-discourse
+hydralit_components
